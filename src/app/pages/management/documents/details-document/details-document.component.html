@@ -1,0 +1,124 @@
+<mat-card class="cardWithShadow theme-card" *ngIf="document">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Document</mat-card-title>
+    <span class="flex-1-auto"></span>
+    <div>
+      <button mat-flat-button color="warn" class="m-r-6" (click)="goBack()">
+        Retour
+      </button>
+    </div>
+  </mat-card-header>
+  <mat-card-content class="b-t-1">
+    <mat-list>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-list-item>
+            <span matListItemTitle class="f-s-16 f-w-600">Titre</span>
+            <span matListItemLine class="mat-body-1">{{ document.title }}</span>
+          </mat-list-item>
+        </div>
+        <div class="col-md-6">
+          <mat-list-item>
+            <span matListItemTitle class="f-s-16 f-w-600">Auteur</span>
+            <span matListItemLine class="mat-body-1">{{
+              document.author
+            }}</span>
+          </mat-list-item>
+        </div>
+        <div class="col-md-6">
+          <mat-list-item>
+            <span matListItemTitle class="f-s-16 f-w-600"
+              >Date de parution</span
+            >
+            <span matListItemLine class="mat-body-1">{{
+              document.releaseDate | date : "yyyy"
+            }}</span>
+          </mat-list-item>
+        </div>
+        <div class="col-md-6">
+          <mat-list-item>
+            <span matListItemTitle class="f-s-16 f-w-600"
+              >Type de document</span
+            >
+            <span matListItemLine class="mat-body-1">{{
+              documentTypeTranslations[document.documentType]
+            }}</span>
+          </mat-list-item>
+        </div>
+        <div class="col-md-6">
+          <mat-list-item>
+            <span matListItemTitle class="f-s-16 f-w-600"
+              >Date de l'enregistrement</span
+            >
+            <span matListItemLine class="mat-body-1">{{
+              document.registrationDate | date : "dd/MM/yyyy"
+            }}</span>
+          </mat-list-item>
+        </div>
+        <div class="col-md-6">
+          <mat-list-item>
+            <span matListItemTitle class="f-s-16 f-w-600">Statut</span>
+            <span matListItemLine class="mat-body-1 m-t-4">
+              <ng-template [ngIf]="document.available">
+                <span
+                  class="bg-light-accent text-success rounded f-w-600 p-6 p-y-4"
+                >
+                  Disponible
+                </span>
+              </ng-template>
+              <ng-template [ngIf]="!document.available">
+                <span
+                  class="bg-light-primary text-error rounded f-w-600 p-6 p-y-4"
+                >
+                  Emprunté
+                </span>
+              </ng-template>
+            </span>
+          </mat-list-item>
+        </div>
+        <div class="col-md-6" *ngIf="borrow">
+          <mat-list-item>
+            <span matListItemTitle class="f-s-16 f-w-600"
+              >Est emprunté par</span
+            >
+            <span matListItemLine class="mat-body-1 m-t-4">
+              <ng-container>
+                <mat-chip
+                  class="bg-light-accent"
+                  [routerLink]="[
+                    '/management/members',
+                    borrowerMember?.memberId
+                  ]"
+                >
+                  {{
+                    borrowerMember?.firstName + " " + borrowerMember?.lastName
+                  }}
+                </mat-chip>
+              </ng-container>
+            </span>
+          </mat-list-item>
+        </div>
+        <div class="col-md-6" *ngIf="borrow">
+          <mat-list-item>
+            <span matListItemTitle class="f-s-16 f-w-600"
+              >Date de l'emprunt</span
+            >
+            <span matListItemLine class="mat-body-1">{{
+              borrow.loanDate | date : "dd/MM/yyyy"
+            }}</span>
+          </mat-list-item>
+        </div>
+      </div>
+      <div class="m-t-15">
+        <mat-list-item>
+          <app-edit-document-button
+            [documentId]="document.documentId"
+          ></app-edit-document-button>
+          <app-delete-document-button
+            [documentId]="document.documentId"
+          ></app-delete-document-button>
+        </mat-list-item>
+      </div>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

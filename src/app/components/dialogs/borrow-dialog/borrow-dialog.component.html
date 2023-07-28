@@ -1,0 +1,22 @@
+<h1 mat-dialog-title class="text-center m-b-5">Sélectionner un membre</h1>
+<div mat-dialog-content class="text-center">
+  <mat-form-field class="theme-select" appearance="outline">
+    <mat-label>Membre</mat-label>
+    <mat-select [(ngModel)]="selectedMemberId">
+      <mat-option *ngFor="let member of members" [value]="member.memberId"
+        >{{ member.firstName }} {{ member.lastName }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Annuler</button>
+  <button
+    mat-button
+    mat-dialog-close
+    [disabled]="!selectedMemberId"
+    (click)="onBorrowDocument()"
+  >
+    Confirmer
+  </button>
+</div>

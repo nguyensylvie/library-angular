@@ -1,0 +1,146 @@
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Modifier le membre</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="b-t-1">
+    <form class="m-t-16" [formGroup]="memberForm" (ngSubmit)="onEditMember()">
+      <div class="row">
+        <div class="col-12 col-md-8">
+          <div class="row">
+            <div class="col-md-6 m-b-6">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                >Nom</mat-label
+              >
+              <mat-form-field
+                appearance="outline"
+                class="w-100"
+                color="primary"
+              >
+                <input
+                  matInput
+                  formControlName="lastName"
+                  placeholder="Nom"
+                  name="lastName"
+                  required
+                />
+                <mat-error
+                  *ngIf="memberForm.get('lastName')?.hasError('required')"
+                >
+                  Le nom est <strong>requis</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 m-b-6">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                >Prénom</mat-label
+              >
+              <mat-form-field
+                appearance="outline"
+                class="w-100"
+                color="primary"
+              >
+                <input
+                  matInput
+                  formControlName="firstName"
+                  placeholder="Prénom"
+                  name="firstName"
+                  required
+                />
+                <mat-error
+                  *ngIf="memberForm.get('firstName')?.hasError('required')"
+                >
+                  Le prénom est <strong>requis</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 m-b-6">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                >Adresse</mat-label
+              >
+              <mat-form-field
+                appearance="outline"
+                class="w-100"
+                color="primary"
+              >
+                <input
+                  matInput
+                  formControlName="address"
+                  placeholder="Adresse"
+                  name="address"
+                  required
+                />
+                <mat-error
+                  *ngIf="memberForm.get('address')?.hasError('required')"
+                >
+                  L'adresse est <strong>requise</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 m-b-6">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                >Code Postal</mat-label
+              >
+              <mat-form-field
+                appearance="outline"
+                class="w-100"
+                color="primary"
+              >
+                <input
+                  matInput
+                  formControlName="postalCode"
+                  placeholder="Code Postal"
+                  name="postalCode"
+                  required
+                />
+                <mat-error
+                  *ngIf="memberForm.get('postalCode')?.hasError('required')"
+                >
+                  Le code postal est <strong>requis</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 m-b-6">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                >Ville</mat-label
+              >
+              <mat-form-field
+                appearance="outline"
+                class="w-100"
+                color="primary"
+              >
+                <input
+                  matInput
+                  formControlName="city"
+                  placeholder="Ville"
+                  name="city"
+                  required
+                />
+                <mat-error *ngIf="memberForm.get('city')?.hasError('required')">
+                  La ville est <strong>requise</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="m-y-15">
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="!memberForm.valid"
+              class="m-r-6"
+            >
+              Modifier
+            </button>
+            <button
+              mat-raised-button
+              color="warn"
+              [routerLink]="['/management/members']"
+            >
+              Annuler
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

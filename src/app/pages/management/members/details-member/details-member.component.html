@@ -1,0 +1,96 @@
+<mat-card class="cardWithShadow theme-card" *ngIf="member">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Membre</mat-card-title>
+    <span class="flex-1-auto"></span>
+    <div>
+      <button mat-flat-button color="warn" (click)="goBack()">Retour</button>
+    </div>
+  </mat-card-header>
+  <mat-card-content class="b-t-1">
+    <mat-list>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-list-item>
+            <span matListItemTitle class="f-s-16 f-w-600">Nom</span>
+            <span matListItemLine class="mat-body-1">{{
+              member.firstName
+            }}</span>
+          </mat-list-item>
+        </div>
+        <div class="col-md-6">
+          <mat-list-item>
+            <span matListItemTitle class="f-s-16 f-w-600">Prénom</span>
+            <span matListItemLine class="mat-body-1">{{
+              member.lastName
+            }}</span>
+          </mat-list-item>
+        </div>
+        <div class="col-md-6">
+          <mat-list-item>
+            <span matListItemTitle class="f-s-16 f-w-600">Adresse</span>
+            <span matListItemLine class="mat-body-1">{{ member.address }}</span>
+          </mat-list-item>
+        </div>
+        <div class="col-md-6">
+          <mat-list-item>
+            <span matListItemTitle class="f-s-16 f-w-600">Code Postal</span>
+            <span matListItemLine class="mat-body-1">{{
+              member.postalCode
+            }}</span>
+          </mat-list-item>
+        </div>
+        <div class="col-md-6">
+          <mat-list-item>
+            <span matListItemTitle class="f-s-16 f-w-600">Ville</span>
+            <span matListItemLine class="mat-body-1">{{ member.city }}</span>
+          </mat-list-item>
+        </div>
+        <div class="col-md-6">
+          <mat-list-item>
+            <span matListItemTitle class="f-s-16 f-w-600"
+              >Date de création</span
+            >
+            <span matListItemLine class="mat-body-1">{{
+              member.registrationDate | date : "dd/MM/yyyy"
+            }}</span>
+          </mat-list-item>
+        </div>
+        <div class="col-md-6">
+          <mat-list-item>
+            <span matListItemTitle class="f-s-16 f-w-600"
+              >Document(s) emprunté(s)</span
+            >
+            <span
+              matListItemLine
+              class="mat-body-1"
+              *ngIf="documentsBorrowed.length === 0; else documentsBorrowedList"
+            >
+              Aucun document emprunté
+            </span>
+            <ng-template #documentsBorrowedList>
+              <a
+                matListItemLine
+                class="mat-body-1"
+                [routerLink]="['/management/documents', document.documentId]"
+                *ngFor="let document of documentsBorrowed"
+                >{{ document.title }} - {{ document.author }} ({{
+                  document.releaseDate
+                }})</a
+              ></ng-template
+            >
+          </mat-list-item>
+        </div>
+      </div>
+      <div class="m-t-15">
+        <mat-list-item>
+          <app-edit-member-button
+            [memberId]="member.memberId"
+          ></app-edit-member-button>
+          <app-delete-member-button
+            [memberId]="member.memberId"
+          ></app-delete-member-button>
+        </mat-list-item>
+      </div>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

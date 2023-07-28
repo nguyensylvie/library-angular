@@ -1,0 +1,138 @@
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Ajouter un nouveau document</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="b-t-1">
+    <form
+      class="m-t-16"
+      [formGroup]="documentForm"
+      (ngSubmit)="onAddDocument()"
+    >
+      <div class="row">
+        <div class="col-12 col-md-8">
+          <div class="row">
+            <div class="col-md-6 m-b-6">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                >Titre</mat-label
+              >
+              <mat-form-field
+                appearance="outline"
+                class="w-100"
+                color="primary"
+              >
+                <input
+                  matInput
+                  formControlName="title"
+                  placeholder="Titre"
+                  name="title"
+                  required
+                />
+                <mat-error
+                  *ngIf="documentForm.get('title')?.hasError('required')"
+                >
+                  Le titre est <strong>requis</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 m-b-6">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                >Auteur</mat-label
+              >
+              <mat-form-field
+                appearance="outline"
+                class="w-100"
+                color="primary"
+              >
+                <input
+                  matInput
+                  formControlName="author"
+                  placeholder="Auteur"
+                  name="author"
+                  required
+                />
+                <mat-error
+                  *ngIf="documentForm.get('author')?.hasError('required')"
+                >
+                  L'auteur est <strong>requis</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 m-b-6">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                >Date de parution</mat-label
+              >
+              <mat-form-field
+                appearance="outline"
+                class="w-100"
+                color="primary"
+              >
+                <input
+                  matInput
+                  formControlName="releaseDate"
+                  [matDatepicker]="picker"
+                  placeholder="Date de parution"
+                />
+                <mat-hint>Seule l'année sera prise en compte.</mat-hint>
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="year"></mat-datepicker>
+                <mat-error
+                  *ngIf="documentForm.get('releaseDate')?.hasError('required')"
+                >
+                  La date de parution est <strong>requise</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 m-b-6">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                >Type de document</mat-label
+              >
+              <mat-form-field
+                appearance="outline"
+                class="w-100"
+                color="primary"
+              >
+                <mat-select
+                  formControlName="documentType"
+                  name="documentType"
+                  placeholder="Sélectionner le type de document"
+                >
+                  <mat-option
+                    *ngFor="let documentType of documentTypes"
+                    [value]="documentType"
+                  >
+                    {{ documentTypeTranslations[documentType] }}
+                  </mat-option>
+                </mat-select>
+                <mat-error
+                  *ngIf="documentForm.get('documentType')?.hasError('required')"
+                  >Le type de document est <strong>requis</strong></mat-error
+                >
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="m-y-15">
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="!documentForm.valid"
+              class="m-r-6"
+            >
+              Ajouter
+            </button>
+            <button
+              mat-raised-button
+              color="warn"
+              [routerLink]="['/management/documents']"
+            >
+              Annuler
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

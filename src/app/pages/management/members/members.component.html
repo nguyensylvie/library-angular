@@ -1,0 +1,113 @@
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Membres</mat-card-title>
+    <span class="flex-1-auto"></span>
+    <button
+      mat-flat-button
+      color="accent"
+      matTooltip="Ajouter un membre"
+      [routerLink]="['/management/members/add']"
+    >
+      Ajouter
+    </button>
+  </mat-card-header>
+
+  <ng-container *ngIf="dataSource.data.length === 0">
+    <mat-card-content class="b-t-1">
+      <p class="text-center">Aucun membre trouvé.</p>
+    </mat-card-content>
+  </ng-container>
+
+  <ng-container *ngIf="dataSource.data.length > 0">
+    <mat-card-content class="b-t-1">
+      <div class="table-responsive m-t-16">
+        <table mat-table [dataSource]="dataSource" matSort class="w-100">
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="f-w-600 mat-subtitle-1 f-s-14"
+            >
+              #
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let element; let i = index"
+              class="mat-body-1"
+            >
+              {{ i + 1 }}
+            </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="f-w-600 mat-subtitle-1 f-s-14"
+            >
+              Nom
+            </th>
+            <td mat-cell *matCellDef="let element" class="mat-body-1">
+              {{ element.firstName }} {{ element.lastName }}
+            </td>
+          </ng-container>
+
+          <!-- Address Column -->
+          <ng-container matColumnDef="address">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="f-w-600 mat-subtitle-1 f-s-14"
+            >
+              Adresse
+            </th>
+            <td mat-cell *matCellDef="let element" class="mat-body-1">
+              {{ element.address }}, {{ element.postalCode }} {{ element.city }}
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="f-w-600 mat-subtitle-1 f-s-14"
+            >
+              Actions
+            </th>
+            <td mat-cell *matCellDef="let element" class="mat-body-1">
+              <div>
+                <a
+                  mat-raised-button
+                  matTooltip="Voir le membre"
+                  [routerLink]="['/management/members', element.memberId]"
+                  class="m-r-6"
+                >
+                  Voir
+                </a>
+                <app-edit-member-button
+                  [memberId]="element.memberId"
+                ></app-edit-member-button>
+                <app-delete-member-button
+                  [memberId]="element.memberId"
+                  (memberDeleted)="loadMemberList()"
+                ></app-delete-member-button>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <mat-paginator
+          [pageSizeOptions]="[20, 50, 100]"
+          showFirstLastButtons
+          aria-label="Sélectionner la page des membres"
+        >
+        </mat-paginator>
+      </div>
+    </mat-card-content>
+  </ng-container>
+</mat-card>

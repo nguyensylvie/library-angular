@@ -1,0 +1,21 @@
+<mat-button-toggle-group
+  [(ngModel)]="selectedPage"
+  class="m-b-20 flex-column flex-sm-row"
+>
+  <mat-button-toggle value="page1" [routerLink]="['/management/borrows']"
+    >Effectuer des emprunts et des retours</mat-button-toggle
+  >
+  <mat-button-toggle value="page2" [routerLink]="['/management/borrows/all']"
+    >Liste des emprunts</mat-button-toggle
+  >
+  <mat-button-toggle
+    value="page3"
+    [routerLink]="['/management/borrows/current']"
+    >Emprunts en cours</mat-button-toggle
+  >
+  <mat-button-toggle
+    value="page4"
+    [routerLink]="['/management/borrows/returned']"
+    >Emprunts retournés</mat-button-toggle
+  >
+</mat-button-toggle-group>
