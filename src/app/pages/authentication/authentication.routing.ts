@@ -1,20 +1,20 @@
-import { Routes } from '@angular/router';
+import { Routes } from "@angular/router";
 
-import { AppSideLoginComponent } from './login/login.component';
-import { AppSideRegisterComponent } from './register/register.component';
+import { AppSideLoginComponent } from "./login/login.component";
+import { AppSideRegisterComponent } from "./register/register.component";
 
 export const AuthenticationRoutes: Routes = [
   {
-    path: '',
+    path: "",
     children: [
       {
-        path: 'login',
+        path: "login",
         component: AppSideLoginComponent,
       },
-      {
-        path: 'register',
-        component: AppSideRegisterComponent,
-      },
+      // {
+      //   path: 'register',
+      //   component: AppSideRegisterComponent,
+      // },
     ],
   },
 ];

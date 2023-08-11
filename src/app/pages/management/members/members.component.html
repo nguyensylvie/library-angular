@@ -20,6 +20,14 @@
 
   <ng-container *ngIf="dataSource.data.length > 0">
     <mat-card-content class="b-t-1">
+      <mat-form-field appearance="outline" class="w-100" color="primary">
+        <input
+          #searchInput
+          matInput
+          (keyup)="applyFilter(searchInput.value)"
+          placeholder="Rechercher par nom ou adresse"
+        />
+      </mat-form-field>
       <div class="table-responsive m-t-16">
         <table mat-table [dataSource]="dataSource" matSort class="w-100">
           <!-- Position Column -->

@@ -33,6 +33,11 @@ export class DocumentsComponent implements AfterViewInit {
     });
   }
 
+  applyFilter(filterValue: string): void {
+    filterValue = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
+  }
+
   displayedColumns: string[] = [
     "position",
     "title",
