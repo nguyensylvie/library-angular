@@ -28,14 +28,19 @@
               >Nom d'utilisateur</mat-label
             >
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput name="username" />
+              <input matInput name="username" [(ngModel)]="username" />
             </mat-form-field>
             <!-- password -->
             <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
               >Mot de passe</mat-label
             >
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput type="password" name="password" />
+              <input
+                matInput
+                type="password"
+                name="password"
+                [(ngModel)]="password"
+              />
             </mat-form-field>
 
             <!-- <div class="d-flex align-items-center m-b-12">
