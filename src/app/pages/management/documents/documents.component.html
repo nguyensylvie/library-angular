@@ -24,9 +24,16 @@
         <input
           #searchInput
           matInput
-          (keyup)="applyFilter(searchInput.value)"
+          (keyup)="clear(searchInput.value)"
+          (keydown.enter)="
+            applyFilterAndSearchGoogleBooksApi(searchInput.value)
+          "
+          name="searchInput"
           placeholder="Rechercher par titre ou auteur"
         />
+        <button mat-icon-button matSuffix (click)="clearSearchInput()">
+          <mat-icon>close</mat-icon>
+        </button>
       </mat-form-field>
       <div class="table-responsive m-t-16">
         <table mat-table [dataSource]="dataSource" class="w-100">
@@ -86,7 +93,12 @@
               Date de parution
             </th>
             <td mat-cell *matCellDef="let element" class="mat-body-1">
-              {{ element.releaseDate | date : "yyyy" }}
+              {{
+                element.releaseDate === null ||
+                element.releaseDate === undefined
+                  ? "N/A"
+                  : (element.releaseDate | date : "yyyy")
+              }}
             </td>
           </ng-container>
 
@@ -114,7 +126,17 @@
               Actions
             </th>
             <td mat-cell *matCellDef="let element" class="mat-body-1">
-              <div>
+              <div *ngIf="element.googleBooksApi">
+                <a
+                  mat-flat-button
+                  color="accent"
+                  matTooltip="Ajouter le document"
+                  (click)="onAddDocument(element.id)"
+                >
+                  Ajouter
+                </a>
+              </div>
+              <div *ngIf="!element.googleBooksApi">
                 <a
                   mat-raised-button
                   matTooltip="Voir le document"

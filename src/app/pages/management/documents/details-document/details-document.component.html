@@ -31,7 +31,10 @@
               >Date de parution</span
             >
             <span matListItemLine class="mat-body-1">{{
-              document.releaseDate | date : "yyyy"
+              document.releaseDate === null ||
+              document.releaseDate === undefined
+                ? "N/A"
+                : (document.releaseDate | date : "yyyy")
             }}</span>
           </mat-list-item>
         </div>

@@ -22,6 +22,14 @@ export class DocumentService {
 
   constructor(private http: HttpClient) {}
 
+  getGoogleBooksApi(searchTerm: string): Observable<any> {
+    const url = "https://www.googleapis.com/books/v1/volumes";
+    const queryParams = {
+      q: searchTerm,
+    };
+    return this.http.get(url, { params: queryParams });
+  }
+
   getAllDocuments(): Observable<Document[]> {
     return this.http.get<Document[]>(this.apiUrl);
   }
